@@ -57,7 +57,15 @@ function goals(state = [], action) {
         }
 }
 
-const store = createStore(todos);
+function app(state = {}, action) {
+        // root reducer
+        return {
+                todos: todos(state.todos, action),
+                goals: goals(state.goals, action),
+        };
+}
+
+const store = createStore(app);
 
 store.subscribe(() => {
         // eslint-disable-next-line no-console
