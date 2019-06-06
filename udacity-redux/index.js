@@ -32,8 +32,25 @@ function createStore(reducer) {
 
 // App Code
 function todos(state = [], action) {
-        if (action === 'ADD_TODO') {
+        if (action.type === 'ADD_TODO') {
                 return state.concat([action.todo]);
         }
+
         return state;
 }
+
+const store = createStore(todos);
+
+store.subscribe(() => {
+        // eslint-disable-next-line no-console
+        console.log('The new state is: ', store.getState());
+});
+
+store.dispatch({
+        type: 'ADD_TODO',
+        todo: {
+                id: 0,
+                name: 'Learn Redux',
+                complete: false,
+        },
+});
